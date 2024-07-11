@@ -49,9 +49,62 @@ console.log('array of employee data: ',  employees );
 // This function will calculate 1 employee's bonus!
 //
 function calculateIndividualEmployeeBonus( employee ) {  
-  // your logic here
+  // employee is received
+  // initialize the bonus at 0
+  let workingBonus = 0;
+  let rating = employee.reviewRating;
+  // calculate the initial bonus percentage for that employee
+  // If rating 2 or lower, 0
+    if (rating <= 2){
+    workingBonus = 0;
+    }
+    // IF rating 3, 4%
+    else if (rating === 3){
+    workingBonus = .04;
+    }
+   // IF rating 4, 6%
+    else if(rating === 4){
+    workingBonus = .06;
+    }
+    // IF rating 5, 10%
+    else if(rating === 5){
+      workingBonus = .10;
+    }
+  // calculate the 15yr+ bonus which is 5%
+  if (employee.employeeNumber.length === 4){
+    workingBonus = workingBonus + .05;
+  }
+  // calculate the sal>65000 penalty, -1%
+  if (employee.annualSalary > 65000){
+    workingBonus = workingBonus - .01;
+  }
+  // check if bonus is too high (>13%) or too low (< 0%) and adjust
+  if (workingBonus > .13){
+    workingBonus = .13;
+  }
+  else if (workingBonus < 0){
+    workingBonus = 0;
+  }
+  let bonusResult = {
+    name: employee.name,
+    bonusPercentage: workingBonus, 
+    totalCompensation: Number(employee.annualSalary) * workingBonus + Number(employee.annualSalary), 
+    totalBonus: Number(employee.annualSalary) * workingBonus
+  }
+  return bonusResult;
+  }  
+
+  for (let member of employees){
+    console.log(calculateIndividualEmployeeBonus(member));
+  }
+//   let atticus = employees[4];
+// console.log(calculateIndividualEmployeeBonus(atticus));
+
+
+
+
+
   
   
   // return new object with bonus results
 
-}
